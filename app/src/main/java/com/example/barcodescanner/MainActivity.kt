@@ -16,10 +16,11 @@ import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
+import dagger.android.DaggerActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Exception
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : DaggerActivity() {
 
     private val requestCodeCameraPermission = 1001
     private lateinit var cameraSource: CameraSource
