@@ -29,6 +29,8 @@ class MainActivity : DaggerAppCompatActivity() {
     lateinit var cameraSource: CameraSource
     @Inject
     lateinit var detector: BarcodeDetector
+    @Inject
+    lateinit var surfaceCallback : SurfaceHolder.Callback
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,8 +48,6 @@ class MainActivity : DaggerAppCompatActivity() {
     }
 
     private fun setupControls() {
-//        detector = BarcodeDetector.Builder(this).build()
-//        cameraSource = CameraSource.Builder(this, detector).setAutoFocusEnabled(true).build()
         cameraView.holder.addCallback(surfaceCallback)
         detector.setProcessor(processor)
     }
@@ -75,24 +75,6 @@ class MainActivity : DaggerAppCompatActivity() {
         }
     }
 
-    private val surfaceCallback = object : SurfaceHolder.Callback {
-        override fun surfaceChanged(holder: SurfaceHolder?, format: Int, width: Int, height: Int) {
-        }
-
-        override fun surfaceDestroyed(holder: SurfaceHolder?) {
-            cameraSource.stop()
-        }
-
-        @SuppressLint("MissingPermission")
-        override fun surfaceCreated(holder: SurfaceHolder) {
-            try {
-                cameraSource.start(holder)
-            } catch (e: Exception) {
-                Toast.makeText(applicationContext, e.message, Toast.LENGTH_LONG).show()
-            }
-        }
-    }
-
     private val processor = object : Detector.Processor<Barcode> {
         override fun release() {
         }
@@ -107,6 +89,5 @@ class MainActivity : DaggerAppCompatActivity() {
                 scanResult.text = ""
             }
         }
-
     }
 }
