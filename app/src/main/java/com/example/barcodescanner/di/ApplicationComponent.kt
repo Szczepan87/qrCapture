@@ -5,7 +5,9 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
+import javax.inject.Singleton
 
+@Singleton
 @Component(modules = [ActivityModule::class, CameraModule::class, AndroidInjectionModule::class])
 interface ApplicationComponent : AndroidInjector<BarcodeApplication>{
 
@@ -16,4 +18,5 @@ interface ApplicationComponent : AndroidInjector<BarcodeApplication>{
 
         fun build():ApplicationComponent
     }
+
 }

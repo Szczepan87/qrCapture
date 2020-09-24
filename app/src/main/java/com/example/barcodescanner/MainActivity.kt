@@ -17,14 +17,18 @@ import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
 import dagger.android.DaggerActivity
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Exception
+import javax.inject.Inject
 
-class MainActivity : DaggerActivity() {
+class MainActivity : DaggerAppCompatActivity() {
 
     private val requestCodeCameraPermission = 1001
-    private lateinit var cameraSource: CameraSource
-    private lateinit var detector: BarcodeDetector
+    @Inject
+    lateinit var cameraSource: CameraSource
+    @Inject
+    lateinit var detector: BarcodeDetector
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +46,8 @@ class MainActivity : DaggerActivity() {
     }
 
     private fun setupControls() {
-        detector = BarcodeDetector.Builder(this).build()
-        cameraSource = CameraSource.Builder(this, detector).setAutoFocusEnabled(true).build()
+//        detector = BarcodeDetector.Builder(this).build()
+//        cameraSource = CameraSource.Builder(this, detector).setAutoFocusEnabled(true).build()
         cameraView.holder.addCallback(surfaceCallback)
         detector.setProcessor(processor)
     }
