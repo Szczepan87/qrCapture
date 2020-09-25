@@ -8,13 +8,13 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.barcodescanner.utils.BarcodeProcessor
+import com.example.base.BaseActivity
 import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.barcode.BarcodeDetector
-import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainActivity : DaggerAppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private val requestCodeCameraPermission = 1001
 
@@ -29,10 +29,11 @@ class MainActivity : DaggerAppCompatActivity() {
 
     @Inject
     lateinit var processor: BarcodeProcessor
+    override val layoutId: Int
+        get() = R.layout.activity_main
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         if (ContextCompat.checkSelfPermission(
                 this,
