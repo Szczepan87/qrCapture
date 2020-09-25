@@ -22,9 +22,6 @@ class QRFragment : BaseFragment<FragmentQRBinding>() {
 
     private val requestCodeCameraPermission = 1001
 
-//    @Inject
-//    lateinit var cameraSource: CameraSource
-
     @Inject
     lateinit var detector: BarcodeDetector
 

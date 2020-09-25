@@ -7,5 +7,17 @@
     <fragment
         android:id="@+id/QRFragment"
         android:name="com.example.barcodescanner.ui.QRFragment"
-        android:label="QRFragment" />
+        android:label="QRFragment">
+        <action
+            android:id="@+id/action_QRFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.barcodescanner.ui.DetailsFragment"
+        android:label="DetailsFragment">
+        <argument
+            android:name="qrResult"
+            app:argType="string" />
+    </fragment>
 </navigation>
