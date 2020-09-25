@@ -34,6 +34,10 @@ abstract class BaseFragment<TViewBinging : ViewDataBinding> : DaggerFragment() {
         findNavController().navigate(navDirections)
     }
 
+    fun navigateBack() {
+        findNavController().popBackStack()
+    }
+
     fun hideKeyboard() {
         val imm =
             requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager

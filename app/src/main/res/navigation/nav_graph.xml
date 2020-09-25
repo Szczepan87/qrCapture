@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/QRFragment">
+    app:startDestination="@id/welcomeFragment">
 
     <fragment
         android:id="@+id/QRFragment"
@@ -19,5 +19,23 @@
         <argument
             android:name="qrResult"
             app:argType="string" />
+        <action
+            android:id="@+id/action_detailsFragment_to_scanHistoryFragment"
+            app:destination="@id/scanHistoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/scanHistoryFragment"
+        android:name="com.example.barcodescanner.ui.ScanHistoryFragment"
+        android:label="ScanHistoryFragment" />
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.example.barcodescanner.ui.WelcomeFragment"
+        android:label="WelcomeFragment">
+        <action
+            android:id="@+id/action_welcomeFragment_to_QRFragment"
+            app:destination="@id/QRFragment" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_scanHistoryFragment"
+            app:destination="@id/scanHistoryFragment" />
     </fragment>
 </navigation>
