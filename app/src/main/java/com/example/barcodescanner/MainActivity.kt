@@ -1,36 +1,34 @@
 package com.example.barcodescanner
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.SurfaceHolder
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.util.isEmpty
-import androidx.core.util.isNotEmpty
+import com.example.barcodescanner.utils.BarcodeProcessor
 import com.google.android.gms.vision.CameraSource
-import com.google.android.gms.vision.Detector
-import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
-import dagger.android.DaggerActivity
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import java.lang.Exception
 import javax.inject.Inject
 
 class MainActivity : DaggerAppCompatActivity() {
 
     private val requestCodeCameraPermission = 1001
+
     @Inject
     lateinit var cameraSource: CameraSource
+
     @Inject
     lateinit var detector: BarcodeDetector
+
     @Inject
-    lateinit var surfaceCallback : SurfaceHolder.Callback
+    lateinit var surfaceCallback: SurfaceHolder.Callback
+
+    @Inject
+    lateinit var processor: BarcodeProcessor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,22 +69,6 @@ class MainActivity : DaggerAppCompatActivity() {
                 setupControls()
             } else {
                 Toast.makeText(applicationContext, "Permission denied!", Toast.LENGTH_LONG).show()
-            }
-        }
-    }
-
-    private val processor = object : Detector.Processor<Barcode> {
-        override fun release() {
-        }
-
-        override fun receiveDetections(detections: Detector.Detections<Barcode>?) {
-            if (detections != null && detections.detectedItems.isNotEmpty()) {
-                val qrCodes = detections.detectedItems
-                val code = qrCodes.valueAt(0)
-                Log.d("DETECTED", code.displayValue)
-                scanResult.text = code.displayValue
-            } else {
-                scanResult.text = ""
             }
         }
     }

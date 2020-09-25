@@ -1,8 +1,8 @@
 package com.example.barcodescanner.di
 
-import android.content.Context
 import android.view.SurfaceHolder
 import com.example.barcodescanner.BarcodeApplication
+import com.example.barcodescanner.utils.BarcodeProcessor
 import com.example.barcodescanner.utils.SurfaceCallback
 import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.barcode.BarcodeDetector
@@ -34,4 +34,8 @@ class CameraModule {
         cameraSource: CameraSource
     ): SurfaceHolder.Callback =
         SurfaceCallback(application, cameraSource)
+
+    @Provides
+    @Singleton
+    fun provideBarcodeProcessor(): BarcodeProcessor = BarcodeProcessor()
 }
