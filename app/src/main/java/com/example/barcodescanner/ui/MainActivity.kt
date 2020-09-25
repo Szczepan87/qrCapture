@@ -1,4 +1,4 @@
-package com.example.barcodescanner
+package com.example.barcodescanner.ui
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -7,6 +7,8 @@ import android.view.SurfaceHolder
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.barcodescanner.R
+import com.example.barcodescanner.databinding.ActivityMainBinding
 import com.example.barcodescanner.utils.BarcodeProcessor
 import com.example.base.BaseActivity
 import com.google.android.gms.vision.CameraSource
@@ -14,7 +16,7 @@ import com.google.android.gms.vision.barcode.BarcodeDetector
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private val requestCodeCameraPermission = 1001
 
@@ -35,6 +37,10 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        checkForPermission()
+    }
+
+    private fun checkForPermission() {
         if (ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.CAMERA
