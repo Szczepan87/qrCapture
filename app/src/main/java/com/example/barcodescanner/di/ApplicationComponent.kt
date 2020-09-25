@@ -8,15 +8,20 @@ import dagger.android.AndroidInjector
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [ActivityModule::class, CameraModule::class, AndroidInjectionModule::class])
-interface ApplicationComponent : AndroidInjector<BarcodeApplication>{
+@Component(
+    modules = [FragmentModule::class,
+        ActivityModule::class,
+        CameraModule::class,
+        AndroidInjectionModule::class]
+)
+interface ApplicationComponent : AndroidInjector<BarcodeApplication> {
 
     @Component.Builder
     interface Builder {
         @BindsInstance
         fun application(application: BarcodeApplication): Builder
 
-        fun build():ApplicationComponent
+        fun build(): ApplicationComponent
     }
 
 }
